@@ -8,6 +8,7 @@ using namespace std;
 const int maxn = 1000000;
 int n; 				 // total number of vertex
 int m;               // total number of edges
+int num_thread = 4;
 vector<int> G[maxn];
 unordered_map<int, bool> has_edge[maxn];
 
@@ -36,7 +37,7 @@ bool check_edge(int a, int b) {
 int base() {
 	int cnt[] = {0, 0, 0, 0};
 
-	omp_set_num_threads(4);
+	omp_set_num_threads(num_thread);
 	#pragma omp parallel for 
 	for(int v=0; v<n; v++) {
 		int tid = omp_get_thread_num();
@@ -55,6 +56,9 @@ int main(int argc, char* argv[])
 {
 	read_graph(argv[1]);
 	cout << "n = " << n << " m = " << m << endl;
+	if(argc > 2) num_thread = atoi(argv[2]);
+	cout << "Thrad_num = " << num_thread << endl;
+
 	int ans = base();
 	printf("Triangle count: %d\n", ans);
 	return 0;
