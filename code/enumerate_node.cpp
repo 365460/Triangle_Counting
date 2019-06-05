@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 	read_graph(argv[1]);
 	cout << "n = " << n << " m = " << m << endl;
 	if(argc > 2) num_thread = atoi(argv[2]);
-	cout << "Thrad_num = " << num_thread << endl;
+	cout << "Thread_num = " << num_thread << endl;
 
 	int ans = base();
 	printf("Triangle count: %d\n", ans);
